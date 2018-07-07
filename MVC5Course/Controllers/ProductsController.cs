@@ -40,7 +40,21 @@ namespace MVC5Course.Controllers
             return View(data);
         }
 
+        public ActionResult AddProduct()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult AddProduct(ProductViewModel data)
+        {
+            if (!ModelState.IsValid) //不有效的時候
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index2");
+        }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
