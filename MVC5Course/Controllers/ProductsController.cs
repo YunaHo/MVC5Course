@@ -100,6 +100,40 @@ namespace MVC5Course.Controllers
             return RedirectToAction("Index2");
         }
 
+        public ActionResult DelProduct(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index2");
+            }
+            var data = db.Product.Find(id);
+            if (data == null)
+            {
+                return RedirectToAction("Index2");
+                //return HttpNotFound();
+            }
+            return View(data);
+        }
+
+        [HttpPost, ActionName("DelProduct")]
+        public ActionResult DelProductConfirmed(int? id)
+        {
+            if(id==null)
+            {
+                return RedirectToAction("Index2");
+            }
+            var item = db.Product.Find(id);
+            if(item==null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Product.Remove(item);
+            db.SaveChanges();
+
+            return RedirectToAction("Index2");
+        }
+
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
