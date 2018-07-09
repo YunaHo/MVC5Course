@@ -10,6 +10,11 @@ namespace MVC5Course.Models
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (this.ClientId == 0)
+            {
+                // 通常 P.K. 為 0 代表著正在執行「新增」動作
+                //但這種方法不見得是好的
+            }
             if (this.DateOfBirth.Value.Year > 1980 && this.City == "Taipei")
             if (this.Longitude.HasValue != this.Latitude.HasValue)
             {
